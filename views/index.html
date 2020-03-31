@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>TypeScript | It Academy</title>
+    <meta
+      name="description"
+      content="Curso de Programación Web / App de Barcelona Activa. Módulo de TypeScript"
+    />
+    <meta charset="utf-8" />
+    <link href="../css/fonts.css" rel="stylesheet" />
+    <link href="../css/style.css" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+      integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <div id="container">
+      <header id="headerMenu">
+        <h1>
+          <span class="light"
+            >FrontEnd It Academy</span
+          ><br />
+          TypeScript 01 \ OOP
+        </h1>
+        <button
+          type="button"
+          id="refreshWindow"
+          class="button bubbleIcon dnone"
+          onclick="refreshWindow()"
+        >
+          <i class="fas fa-redo refreshIcon"></i>
+        </button>
+      </header>
+      <hr class="separatorRed" />
+
+        
+
+      <section id="allCarGrid">
+        
+         
+      </section>
+
+      <p id="issues"></p>
+
+      <div class="gridTables">
+        <button class="btn" id="btn-modalCreateCar">
+          Create Car <i class="fas fa-car"></i>
+        </button>
+        <button class="btn" id="btn-modalAddWheels">
+          Add Wheels <i class="fas fa-dharmachakra"></i>
+        </button>
+      </div>
+
+      <!--Begin of modal 01-->
+      <div class="overlay" id="overlayAdd"></div>
+      <div class="modal" id="modalAdd">
+        <button class="modal-close-btn" id="close-btnAdd">
+          <a class="close-button">Close</a>
+        </button>
+        <!-- create car Form -->
+        <form name="splitNameForm">
+          <h3>Phase 01 | Create Car</h3>
+
+          <div class="row">
+            <label>Plate</label><br />
+            <input type="text" id="txtPlate" value="1899FCB" />
+            <span id="errorPlate"></span>
+          </div>
+
+          <div class="row">
+            <label>Brand</label><br />
+            <input type="text" id="txtBrand" value="Jeep" />
+            <span id="errorBrand"></span>
+          </div>
+
+          <div class="row">
+            <label>Color</label><br />
+            <select id="txtColor">
+              <option value="white" id="txtWhite">White</option>
+              <option value="silver" id="txtSilver">Silver</option>
+              <option value="red" id="txtRed"
+                >Red <span id="redBubble"></span
+              ></option>
+              <option value="green" id="txtGreen"
+                >Green <span id="greenBubble"></span
+              ></option>
+              <option value="blue" id="txtBlue"
+                >Blue <span id="blueBubble"></span
+              ></option>
+              <option value="yellow" id="txtYellow"
+                >Yellow <span id="yellowBubble"></span
+              ></option>
+              <i class="fas fa-chevron-down"></i>
+            </select>
+            <span id="errorColor"></span>
+            <div class="bubble" id="bubble"></div>
+          </div>
+
+          <div class="row">
+            <button
+              type="button"
+              id="btnCreateCar"
+              class="button"
+              onclick="createCar()"
+            >
+              Create car <i class="fas fa-car"></i>
+            </button>
+            <span id="createMsg" class="dnone"
+              >Your car has been created correctly</span
+            >
+          </div>
+        </form>
+      </div>
+
+      <!--Begin of modal 02-->
+      <div class="overlay" id="overlay02"></div>
+      <div class="modal" id="modal02">
+        <button class="modal-close-btn" id="close-btn02">
+          <a class="close-button">Close</a>
+        </button>
+        <!-- add weels Form -->
+        <form name="addWheels" id="addWheelsForm">
+          <h3>Phase 02 | Add Wheels</h3>
+          <div id="gridInputs">
+            <div class="row item1">
+              <label>Wheel 1 Brand</label><br />
+              <input type="text" id="wheelBrand1" value="Jeep" />
+              <span id="errWheelBrand1"></span>
+            </div>
+
+            <div class="row item2">
+              <label>Wheel 1 &oslash;</label><br />
+              <input type="text" id="wheelDiameter1" value="Jeep" />
+              <span id="errWheelDiameter1"></span>
+            </div>
+
+            <div class="row item3">
+              <label>Wheel 2 Brand</label><br />
+              <input type="text" id="wheelBrand2" value="Jeep" />
+              <span id="errWheelBrand2"></span>
+            </div>
+
+            <div class="row item4">
+              <label>Wheel 2 &oslash;</label><br />
+              <input type="text" id="wheelDiameter2" value="Jeep" />
+              <span id="errWheelDiameter2"></span>
+            </div>
+
+            <div class="row item5">
+              <label>Wheel 3 Brand</label><br />
+              <input type="text" id="wheelBrand3" value="Jeep" />
+              <span id="errWheelBrand3"></span>
+            </div>
+
+            <div class="row item6">
+              <label>Wheel 3 &oslash;</label><br />
+              <input type="text" id="wheelDiameter3" value="Jeep" />
+              <span id="errWheelDiameter3"></span>
+            </div>
+
+            <div class="row item7">
+              <label>Wheel 4 Brand</label><br />
+              <input type="text" id="wheelBrand4" value="Jeep" />
+              <span id="errWheelBrand4"></span>
+            </div>
+
+            <div class="row item8">
+              <label>Wheel 4 &oslash;</label><br />
+              <input type="text" id="wheelDiameter4" value="Jeep" />
+              <span id="errWheelDiameter4"></span>
+            </div>
+
+            <div class="row item9">
+              <select id="selectCar">
+                <i class="fas fa-chevron-down"></i>
+                <option value="" id="demoSelect">Select your car</option>
+              </select>
+              <span id="errorSelectCar"></span>
+            </div>
+
+            <div class="row item10">
+              <button
+                type="button"
+                id="btnAddWheels"
+                class="button"
+                onclick="addWheels()"
+              >
+                Add Wheels <i class="fas fa-dharmachakra"></i>
+              </button>
+              <span id="createWheelsMsg" class="dnone"
+                >You have created created correctly</span
+              >
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script src="../js/modal.js"></script>
+
+    <script src="../models/car.js"></script>
+    <script src="../models/wheel.js"></script>
+    <script src="../controllers/controller.js"></script>
+  </body>
+</html>

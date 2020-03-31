@@ -1,0 +1,581 @@
+/* ============================BEGIN COMMON STYLES============================== */
+
+body {
+    line-height: 1;
+    font-family: 'Gotham', Arial, Helvetica, sans-serif !important;
+    color      : #425363;
+}
+
+#container {
+    width : 80%;
+    height: auto;
+    margin: auto;
+}
+
+h1 {
+    font-size: 1.36em;
+    line-height: 146%;
+}
+
+.refreshIcon {
+    font-size: 1.86em;
+}
+
+h1,
+.bubbleIcon {
+    margin: 84px 0 34px;
+}
+
+.refreshIcon {
+    color     : #425363;
+    transition: all 0.25s ease-out;
+    margin-top: 10px;
+}
+
+.refreshIcon:hover {
+    color    : #e73845;
+    transform: rotate(360deg);
+}
+
+.bubbleIcon {
+    width             : 40px;
+    height            : 40px;
+    border-radius     : 40px;
+    /*background-color: rgba(233,239,244,0.3);*/
+    padding           : 6px;
+
+    text-align: center;
+}
+
+h2 {
+    font-size      : 1.2rem;
+    font-weight    : 400;
+    text-decoration: underline;
+    margin         : 0;
+}
+
+h3 {
+    font-size    : 1.4rem;
+    font-weight  : 600;
+    margin-bottom: 26px;
+}
+
+.light {
+    font-weight: 300;
+    font-style : normal;
+    line-height: 136%;
+}
+
+.separatorBlue {
+    width           : 56px;
+    height          : 4px;
+    margin          : 0.8rem 0;
+    background-color: #00b1ff;
+    border          : none;
+}
+
+.separatorRed {
+    width           : 56px;
+    height          : 4px;
+    margin          : 0.8rem 0;
+    background-color: #e73845;
+    border-top      : transparent;
+    border          : none;
+}
+
+.separatorWhite {
+    width           : 56px;
+    height          : 4px;
+    margin          : 0.8rem 0;
+    background-color: #fff;
+    border-top      : transparent;
+    border          : none;
+}
+
+#container>input,
+.row>input,
+.simpleFormOutline>input,
+optgroup,
+optgroup[label],
+option {
+    padding      : 20px 5%;
+    width        : 92.5%;
+    margin-bottom: 16px;
+    border       : 1px solid #425363;
+    border-radius: 3px;
+    margin-top   : 6px;
+}
+
+#container>button,
+.btn,
+.row>button,
+.row>input,
+.simpleFormOutline>button {
+    padding           : 12px 24px;
+    font-family       : 'Gotham', Arial, Helvetica, sans-serif !important;
+    border            : 1px solid #425363;
+    padding           : 20px;
+    color             : #425363;
+    font-size         : 0.86em;
+    cursor            : pointer;
+    box-shadow        : inset 0 0 0 0 #425363;
+    -webkit-transition: ease-out 0.15s;
+    -moz-transition   : ease-out 0.15s;
+    transition        : ease-out 0.15s;
+    margin-bottom     : 16px;
+}
+
+.row>input {
+    border-radius: 3px;
+}
+
+#container>button,
+.btn,
+.row>button,
+.simpleFormOutline>button {
+    border-radius: 29px;
+}
+
+.incorrectBorder {
+    border: 2px solid #e73845 !important;
+}
+
+.incorrectText {
+    color: #e73845;
+}
+
+.inputOk {
+    border: 2px solid mediumspringgreen !important;
+    color : mediumspringgreen;
+}
+
+.row>input {
+    width              : 92.5%;
+    -webkit-user-select: none;
+    /* Safari */
+    -ms-user-select: none;
+    /* IE 10+ and Edge */
+    user-select: none;
+    /* Standard syntax */
+}
+
+#container>button,
+.btn,
+.simpleFormOutline>button {
+    width: 100%;
+}
+
+.row>button {
+    width     : 68%;
+    margin-top: 16px;
+}
+
+#btnDepositFunction {
+    width     : 46%;
+    margin-top: 16px;
+}
+
+.flexTwoButtons {
+    display        : flex;
+    flex-direction : row;
+    flex-wrap      : nowrap;
+    justify-content: space-between;
+    align-items    : center;
+    align-content  : center;
+}
+
+#btnTakeOutFunction {
+    width     : 50%;
+    margin-top: 16px;
+}
+
+#container>button:hover,
+.btn:hover,
+.row>button:hover,
+.simpleFormOutline>button:hover {
+    box-shadow: inset 0 0 0 50px #425363;
+    color     : #FFF;
+}
+
+#container>p {
+    font-size  : 0.76em;
+}
+
+#issues {
+    font-size : 0.76em;
+    color     : #e73845;;
+}
+
+.answer {
+    margin-top: 20px;
+}
+
+.even {
+    color: #e73845;
+}
+
+.dnone {
+    display: none !important;
+}
+
+.dblock {
+    display: inline-block;
+}
+
+/* ============================END OF COMMON STYLES============================== */
+
+.gridTables {
+    display              : grid;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap      : 20px;
+    grid-row-gap         : 20px;
+    justify-items        : stretch;
+    align-items          : stretch;
+    align-self           : left;
+    bottom               : 10vh;
+    position             : fixed;
+    width                : 80%;
+}
+
+.gridData {
+    display              : grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-column-gap      : 20px;
+    grid-row-gap         : 20px;
+    justify-items        : stretch;
+    align-items          : stretch;
+    align-self           : center;
+    margin-top           : 10vh;
+    margin               : auto;
+}
+
+/* ============================END OF COMMON STYLES============================== */
+
+/* * Button */
+
+button {
+    margin            : 0;
+    border            : none;
+    border-radius     : 0;
+    outline           : none;
+    -webkit-appearance: none;
+    -moz-appearance   : none;
+    appearance        : none;
+    cursor            : pointer;
+    position          : relative;
+}
+
+.btn:hover {
+    top: 3px;
+}
+
+/* * Modal */
+
+.modal {
+    pointer-events: none;
+    opacity       : 0;
+    transition    : opacity 0.3s;
+    position      : absolute;
+    top           : 16px;
+    left          : 0;
+    right         : 0;
+    max-width     : 586px;
+    margin        : 0 auto;
+    padding       : 4%;
+    background    : #fff;
+    box-shadow    : 0 2px 6px rgba(66, 83, 99, 0.3);
+}
+
+#modal02 {
+    max-width: 768px;
+}
+
+.modal-close-btn {
+    position : absolute;
+    right    : 26px;
+    top      : 26px;
+    font-size: 20px;
+}
+
+#gridInputs {
+    display              : grid;
+    grid-template-columns: auto auto auto auto;
+    grid-gap             : 0 40px;
+}
+
+#gridInputs input {
+    width: 74%;
+}
+
+.item9 {
+    grid-column: 1 / span 2;
+}
+
+.item10 {
+    grid-column: 3 / span 2;
+}
+
+
+.item10 button {
+    width: 100%;
+}
+
+/*
+#gridInputs input {
+    width: 72% !important;
+}*/
+
+/* * Overlay */
+
+.overlay {
+    pointer-events  : none;
+    opacity         : 0;
+    transition      : opacity 0.3s;
+    position        : fixed;
+    top             : 0;
+    left            : 0;
+    right           : 0;
+    bottom          : 0;
+    width           : 100%;
+    height          : 100%;
+    background-color: rgba(66, 83, 99, 0.3);
+}
+
+/* * JS */
+
+.is-visible {
+    opacity       : 1;
+    pointer-events: auto;
+}
+
+/* Hamburger */
+
+.close-button {
+    width      : 90px;
+    height     : 45px;
+    box-shadow : 0px 10 10px 10px rgba(66, 83, 99, 0.3);
+    margin-left: -55px;
+    display    : block;
+    z-index    : 200;
+    text-indent: -9999px;
+}
+
+
+
+.close-button:after,
+.close-button:before {
+    content           : "";
+    width             : 30px;
+    height            : 2px;
+    background        : #425363;
+    position          : absolute;
+    top               : 48%;
+    left              : 22%;
+    -webkit-transform : rotate(-45deg);
+    -moz-transform    : rotate(-45deg);
+    -ms-transform     : rotate(-45deg);
+    -o-transform      : rotate(-45deg);
+    transform         : rotate(-45deg);
+    -webkit-transition: all 0.3s ease-out;
+    -moz-transition   : all 0.3s ease-out;
+    -ms-transition    : all 0.3s ease-out;
+    -o-transition     : all 0.3s ease-out;
+    transition        : all 0.3s ease-out;
+}
+
+.close-button:after {
+    -webkit-transform : rotate(45deg);
+    -moz-transform    : rotate(45deg);
+    -ms-transform     : rotate(45deg);
+    -o-transform      : rotate(45deg);
+    transform         : rotate(45deg);
+    -webkit-transition: all 0.3s ease-out;
+    -moz-transition   : all 0.3s ease-out;
+    -ms-transition    : all 0.3s ease-out;
+    -o-transition     : all 0.3s ease-out;
+    transition        : all 0.3s ease-out;
+}
+
+.close-button:hover:after,
+.close-button:hover:before {
+    -webkit-transform: rotate(180deg);
+    -moz-transform   : rotate(180deg);
+    -ms-transform    : rotate(180deg);
+    -o-transform     : rotate(180deg);
+    transform        : rotate(180deg);
+}
+
+/* */
+
+select {
+    appearance         : none;
+    -moz-appearance    : none;
+    -webkit-appearance : none;
+    text-overflow      : '';
+    border             : 1px solid rgba(66, 83, 99, 1);
+    border-radius      : 3px;
+    background-color   : transparent;
+    color              : rgba(66, 83, 99, 1);
+    outline            : none;
+    display            : inline-block;
+    background-image   : linear-gradient(45deg, rgba(0, 0, 0, 0) 50%, rgba(66, 83, 99, 1) 50%), linear-gradient(135deg, rgba(66, 83, 99, 1) 50%, rgba(0, 0, 0, 0) 50%), linear-gradient(to right, #ffffff, #ffffff), linear-gradient(to right, rgba(66, 83, 99, 1), rgba(66, 83, 106, 1));
+    background-position: calc(100% - 21px) 50%, calc(100% - 13px) 50%, calc(100% - 3px) 50%, calc(100% - 2px) 50%;
+    background-size    : 8px 8px, 8px 8px, 36px calc(100% - 6px), 38px calc(100% - 4px);
+    background-repeat  : no-repeat;
+    margin-top         : 16px;
+    padding            : 20px 0 20px 20px;
+    width              : 100%;
+    font-size          : 0.86rem;
+    font-family        : 'Gotham', Arial, Helvetica, sans-serif !important;
+}
+
+
+
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+    select {
+        padding-right: 3em;
+    }
+}
+
+select::-ms-expand {
+    display: none;
+}
+
+.bubble {
+    margin-top   : 16px;
+    width        : 20px;
+    height       : 20px;
+    border-radius: 10px;
+}
+
+.yellowBubble {
+    background-color: #F5D41F;
+}
+
+.blueBubble {
+    background-color: #3285CE;
+}
+
+.redBubble {
+    background-color: #e73845;
+}
+
+.greenBubble {
+    background-color: seagreen;
+}
+
+.silverBubble {
+    background-color: silver;
+}
+
+.whiteBubble {
+    background-color: whitesmoke;
+}
+
+
+/* grid & flex car images */
+
+#headerMenu {
+    display        : flex;
+    flex-direction : row;
+    flex-wrap      : nowrap;
+    justify-content: space-between;
+    align-items    : flex-end;
+    align-content  : stretch;
+}
+
+#allCarGrid {
+    margin-top           : 36px;
+    display              : grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows   : 1fr;
+    grid-column-gap      : 30px;
+    grid-row-gap         : 30px;
+    justify-items        : stretch;
+    align-items          : stretch;
+}
+
+.carData {
+    display              : grid;
+    grid-template-columns: auto auto;
+    padding              : 16px 0 6px 0;
+    grid-gap             : 10px 0;
+    font-size            : 0.94rem;
+    border               : 1px solid #425363;
+    /* background-color  : rgba(233, 239, 244, 0.4); */
+    border-radius        : 3px;
+    align-items          : center;
+    justify-content      : center;
+}
+
+.carData figure:nth-child(1) {
+    grid-column: 1 / span 2;
+    margin     : 1.6em 3.4em 0.5em 3.4em
+}
+
+/*
+.carData div:nth-child(1n+2) {
+    margin: 0 0 0 32px;
+}
+*/
+.carData div:nth-child(2) {
+    margin: 0 0 0 32px;
+}
+
+.carData div:nth-child(3) {
+    margin: 0 32px 0 0;
+}
+
+.carData ul {
+    margin    : 0;
+    padding   : 0;
+    text-align: center;
+}
+
+.carData li {
+    line-height   : 260%;
+    list-style    : none;
+    font-size     : 0.73rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color         : #86969b;
+}
+
+.carData li:nth-child(1n+2) {
+    /*border-top  : 1px solid rgba(66, 83, 99, 1);*/
+    border-top    : 1px solid rgba(233, 239, 244, 1);
+}
+
+
+@media only screen and (max-width: 992px) {
+    h1,
+    .bubbleIcon {
+        margin: 60px 0 34px;
+    }
+
+    .gridTables {
+        bottom: 4vh;
+    }
+
+    #allCarGrid {
+        margin-top: 26px;
+    }
+
+    .carData {
+        padding : 10px 0 6px 0;
+        grid-gap: 6px 0;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    #allCarGrid {
+        margin-top           : 36px;
+        display              : grid;
+        grid-template-columns: 1fr;
+        grid-template-rows   : 1fr 1fr 1fr;
+        grid-column-gap      : 30px;
+        grid-row-gap         : 30px;
+        justify-items        : stretch;
+        align-items          : stretch;
+    }
+}
