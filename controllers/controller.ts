@@ -240,10 +240,9 @@ var addWheels = () => {
         let wheelBrand: string = (<HTMLInputElement>document.getElementById("wheelBrand" + i)).value;
 
         for (let carItem of arrCar) {
-
             if (selectedCar === j.plate) {
                 j = carItem;
-                j.addWheel(new Wheel(wheelDiameter, wheelBrand));
+                j.addWheel(new Wheel(wheelDiameter, wheelBrand[]));
                 printColorCarWheels(colorInput.value);
             }
         }
@@ -264,10 +263,10 @@ var validateWheelBrand = () => {
             if (carItem.toLowerCase() === wheelBrand.toLowerCase()) {
                 isValidBrand = true;
                 wheelBrand.setAttribute("class", "inputOk");
-                resetError(errWheelBrand, wheelBrand);
+                resetError(errWheelBrand, wheelBrand[i]);
             } else {
                 isValidBrand = false;
-                error(errWheelBrand, wheelBrand);
+                error(errWheelBrand, wheelBrand[i]);
             }
         });
     }
@@ -285,10 +284,10 @@ var validateDiameter = () => {
         // if (diameter < 0.4 || diameter > 2) {
         if (wheelDiameter < 0.4 || wheelDiameter > 2) {
             isValidDiameter = false;
-            error(errWheelDiameter, wheelDiameter);
+            error(errWheelDiameter, wheelDiameter[i]);
         } else {
             wheelDiameter.setAttribute("class", "inputOk");
-            resetError(errWheelDiameter, wheelDiameter);
+            resetError(errWheelDiameter, wheelDiameter[i]);
         }
     }
     return isValidDiameter;
