@@ -1,6 +1,6 @@
 let myCar: Car;
 // Aquesta és la manera de declarar un array d'objectes buit.
-let arrCar: { plate: string, brand: string, color: string }[] = [];
+let arrCar: Car[] = new Array();
 //let arrWheel: { diameter: number, brand: string }[] = [];
 
 let brandCarArr: string[] = new Array("Abarth", "Alfa Romeo", "Aston Martin", "Audi", "Bentley", "BMW", "Cadillac", "Caterham", "Chevrolet", "Citroen", "Dacia", "Ferrari", "Fiat", "Ford", "Honda", "Infiniti", "Isuzu", "Iveco", "Jaguar", "Jeep", "Kia", "KTM", "Lada", "Lamborghini", "Lancia", "Land Rover", "Lexus", "Lotus", "Maserati", "Mazda", "Mercedes-Benz", "Mini", "Mitsubishi", "Morgan", "Nissan", "Opel", "Peugeot", "Porsche", "Renault", "Rolls-Royce", "Seat", "Skoda", "Smart", "SsangYong", "Subaru", "Suzuki", "Tata", "Tesla", "Toyota", "Volkswagen", "Volvo");
@@ -16,16 +16,13 @@ plateInput.addEventListener("blur", validatePlate, false);
 brandInput.addEventListener("blur", validateBrand, false);
 colorInput.addEventListener("change", validateColor, false);
 
-/* ====================== Inputs wheels form ====================== */
-
-let checkWheels = (<HTMLInputElement>document.querySelector("#btnAddWheels"));
-
 /* ========================== Creat Car =========================== */
-function createCar(plate: string, brand: string, color: string) {
 
-    plate = plateInput.value;
-    brand = brandInput.value;
-    color = colorInput.value;
+function createCar() {
+
+    let plate = plateInput.value;
+    let brand = brandInput.value;
+    let color = colorInput.value;
 
     if (validatePlate() && validateBrand() && validateColor()) {
 
@@ -124,6 +121,10 @@ var printColorCar = (bubbleColor: any) => {
     carImage.setAttribute("height", "auto");
     carImage.setAttribute("class", "carImage");
 
+    for (let i = 0; i <= arrCar.length; i++) {
+        carImage.setAttribute("id", "carImage" + i);
+    }
+
     switch (bubbleColor.toLowerCase()) {
 
         case "white":
@@ -163,7 +164,7 @@ function validatePlate() {
         //return false;
     } else {
         plateInput.setAttribute("class", "inputOk");
-        resetError(errorPlate, plateInput)
+        resetError(errorPlate, plateInput);
         isValidPlate = true;
     }
     // Comprovo que la matrícula sigui única
@@ -174,7 +175,7 @@ function validatePlate() {
             error(errorPlate, plateInput);
         } else {
             plateInput.setAttribute("class", "inputOk");
-            resetError(errorPlate, plateInput)
+            resetError(errorPlate, plateInput);
             isValidPlate = true;
         }
     }
@@ -221,86 +222,169 @@ function validateColor() {
 
 /* =============================================== WHEELS =============================================== */
 
+function sendFormWheels() {
 
-var addWheels = () => {
-    let i: number = 0;
-    let j: any;
-    let selectedCar: string = (<HTMLInputElement>document.getElementById("selectCar")).value;
+    let errors: number = 0;
+    let i: number;
 
-    let wheels: number[] = [];
+    // Pas 1: Validar tots els inputs
     for (i = 1; i <= 4; i++) {
         let wheelDiameter: number = Number((<HTMLInputElement>document.getElementById("wheelDiameter" + i)).value);
         //let wheelBrand: string = (<HTMLInputElement>document.getElementById("wheelBrand" + i)).value;
-        wheels.push(wheelDiameter);
-    }
 
-    console.log(wheels);
-    if (wheels.every(validateDiameter) && wheels.every(validateWheelBrand)) {
-        let wheelDiameter: number = Number((<HTMLInputElement>document.getElementById("wheelDiameter" + i)).value);
-        let wheelBrand: string = (<HTMLInputElement>document.getElementById("wheelBrand" + i)).value;
+        let errWheelDiameter: any = document.getElementById("errWheelDiameter");
+        //let errWheelBrand: any = document.getElementById("errWheelBrand");
 
-        for (let carItem of arrCar) {
-            if (selectedCar === j.plate) {
-                j = carItem;
-                j.addWheel(new Wheel(wheelDiameter, wheelBrand[]));
-                printColorCarWheels(colorInput.value);
-            }
-        }
-    }
-}
+        let correctInput: any;
+        let incorrectInput: any;
 
-var validateWheelBrand = () => {
-    let isValidBrand: boolean = false;
-    let i: number = 0;
-
-    for (i = 1; i < 5; i++) {
-
-        let wheelBrand: any = (<HTMLInputElement>document.getElementById("wheelBrand" + i)).value;
-        let errWheelBrand: any = (<HTMLInputElement>document.getElementById("errWheelBrand" + i));
-
-        // Probar con el for of?
-        brandCarArr.forEach(carItem => {
-            if (carItem.toLowerCase() === wheelBrand.toLowerCase()) {
-                isValidBrand = true;
-                wheelBrand.setAttribute("class", "inputOk");
-                resetError(errWheelBrand, wheelBrand[i]);
-            } else {
-                isValidBrand = false;
-                error(errWheelBrand, wheelBrand[i]);
-            }
-        });
-    }
-    return isValidBrand;
-}
-
-var validateDiameter = () => {
-    //El diàmetre de la roda ha de ser major que 0.4 m i menor que 2 m.
-    let isValidDiameter: boolean = false;
-    let i: number = 0;
-
-    for (i = 1; i < 5; i++) {
-        let wheelDiameter: any = Number((<HTMLInputElement>document.getElementById("wheelDiameter" + i)).value);
-        let errWheelDiameter: any = (<HTMLInputElement>document.getElementById("errWheelDiameter" + i));
-        // if (diameter < 0.4 || diameter > 2) {
-        if (wheelDiameter < 0.4 || wheelDiameter > 2) {
-            isValidDiameter = false;
-            error(errWheelDiameter, wheelDiameter[i]);
+        if (!validateDiameter(Number(wheelDiameter))) {
+            incorrectInput = (<HTMLInputElement>document.getElementById("wheelDiameter" + i));
+            incorrectInput.setAttribute("class", "incorrectBorder");
+            errWheelDiameter.innerHTML = "wheel diameter has to be 0.4 to 2";
+            errors++;
         } else {
-            wheelDiameter.setAttribute("class", "inputOk");
-            resetError(errWheelDiameter, wheelDiameter[i]);
+            correctInput = (<HTMLInputElement>document.getElementById("wheelDiameter" + i));
+            correctInput.setAttribute("class", "inputOk");
+
         }
+
+        /*if (wheelBrand == "") {
+            alert("required input");
+            //error(errWheelBrand, wheelBrand);
+            errors++;
+        }*/
+    }
+
+
+    // capturo el cotxe seleccionat per value matrícula per fer la comparació amb els cotxes creats a l'array de cotxes
+    let selectedCar: any = (<HTMLInputElement>document.getElementById("selectCar")).value;
+
+    // Pas 2: Si totes estan bé, les afgim
+    if (errors == 0) {
+
+        let x: number;
+        for (x = 1; x <= 4; x++) {
+
+            let wheelDiameter: number = Number((<HTMLInputElement>document.getElementById("wheelDiameter" + x)).value);
+            let wheelBrand: string = (<HTMLInputElement>document.getElementById("wheelBrand" + x)).value;
+
+            let wheelGenerica = new Wheel(Number(wheelDiameter), wheelBrand);
+
+            console.log(wheelGenerica);
+
+            let j: any;
+            for (let carItem of arrCar) {
+                j = carItem;
+                if (selectedCar === j.plate) {
+                    j.addWheel(wheelGenerica);
+                    console.log(j);
+                }
+            }
+        }
+        // recorro array de cotxes per imprimir rodes en el cotxe seleccionat. Fora del bucle d'afegir rodes, perquè si no 
+
+        let arrCarImg: any[] = [];
+        let i: number;
+        let carImage: any;
+        for (i = 1; i <= arrCar.length; i++) {
+            carImage = document.querySelector("#carImage");
+            arrCarImg.push(carImage);
+        }
+
+        const imgFound: any = arrCarImg.find(item => {
+            if (selectedCar.value === j.value) {
+
+            }
+            return selectedCar.id;
+        });
+
+        let j: any;
+        for (let carItem of arrCar) {
+            j = carItem;
+            if (selectedCar === j.plate) {
+
+                selectedCar = j;
+                switch (j.color) {
+
+                    case (j.color = "white"):
+                        selectedCar.value = "white";
+                        carImage.src = "../images/white-car.svg";
+                        break;
+                    case (j.color = "silver"):
+                        selectedCar.value = "silver";
+                        carImage.src = "../images/silver-car.svg";
+                        break;
+                    case (j.color = "red"):
+                        selectedCar.value = "red";
+                        carImage.src = "../images/red-car.svg";
+                        break;
+                    case (j.color = "green"):
+                        selectedCar.value = "green";
+                        carImage.src = "../images/green-car.svg";
+                        break;
+                    case (j.color = "blue"):
+                        selectedCar.value = "blue";
+                        carImage.src = "../images/blue-car.svg";
+                        break;
+                    case (j.color = "yellow"):
+                        selectedCar.value = "yellow";
+                        carImage.src = "../images/yellow-car.svg";
+                        break;
+                    default:
+                        break;
+                }
+
+                if (j.value === selectedCar.value) {}
+            }
+        }
+
+        console.log(imgFound);
+
+
+        
+        //printColorCarWheels(colorInput.value);
+        console.log(selectedCar.value);
+
+    }
+
+}
+/*
+var validateWheelBrand = (brand: string) => {
+    
+    let i: number = 0;
+    let wheelBrand: any = (<HTMLInputElement>document.getElementById("wheelBrand" + i));
+    brand = wheelBrand.value;
+ 
+    brandCarArr.forEach(brandCarItem => {
+        if (brandCarItem.toLowerCase() != wheelBrand.toLowerCase()) {
+            return false;
+        } 
+    });
+    return brand;
+}
+*/
+
+var validateDiameter = (diameter: number) => {
+    let isValidDiameter: boolean = false;
+    if (diameter < 0.4 || diameter > 2) {
+        isValidDiameter = false;
+    } else {
+        isValidDiameter = true;
     }
     return isValidDiameter;
 }
+
 /* ====== Escollir imatge de cotxe a l'afegir les rodes ====== */
-var printColorCarWheels = (bubbleColor: any) => {
+/*var printColorCarWheels = (color: any) => {
 
-    let carImage: any = document.createElement("img");
-    carImage.setAttribute("width", "100%");
-    carImage.setAttribute("height", "auto");
-    carImage.setAttribute("class", "carImage");
+    let i: number;
+    let carImage: any;
+    for (i = 0; i < arrCar.length; i++) {
+        carImage = document.getElementById("carImage" + i);
+    }
 
-    switch (bubbleColor.toLowerCase()) {
+    switch (myCar.color) {
 
         case "white":
             carImage.src = "../images/white-car.svg";
@@ -324,7 +408,7 @@ var printColorCarWheels = (bubbleColor: any) => {
             break;
     }
     return carImage;
-}
+}*/
 
 
 // Error functions
