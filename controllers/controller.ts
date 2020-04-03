@@ -341,6 +341,7 @@ function sendFormWheels() {
 
         console.log(imgFound);
 
+        
 
         
         //printColorCarWheels(colorInput.value);
