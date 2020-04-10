@@ -1,7 +1,6 @@
 let myCar: Car;
 // Aquesta és la manera de declarar un array d'objectes buit.
 let arrCar: Car[] = new Array();
-//let arrWheel: { diameter: number, brand: string }[] = [];
 
 let brandCarArr: string[] = new Array("Abarth", "Alfa Romeo", "Aston Martin", "Audi", "Bentley", "BMW", "Cadillac", "Caterham", "Chevrolet", "Citroen", "Dacia", "Ferrari", "Fiat", "Ford", "Honda", "Infiniti", "Isuzu", "Iveco", "Jaguar", "Jeep", "Kia", "KTM", "Lada", "Lamborghini", "Lancia", "Land Rover", "Lexus", "Lotus", "Maserati", "Mazda", "Mercedes-Benz", "Mini", "Mitsubishi", "Morgan", "Nissan", "Opel", "Peugeot", "Porsche", "Renault", "Rolls-Royce", "Seat", "Skoda", "Smart", "SsangYong", "Subaru", "Suzuki", "Tata", "Tesla", "Toyota", "Volkswagen", "Volvo");
 
@@ -16,6 +15,12 @@ plateInput.addEventListener("blur", validatePlate, false);
 brandInput.addEventListener("blur", validateBrand, false);
 colorInput.addEventListener("change", validateColor, false);
 
+/* ====================== Car Values addWheelsForm ====================== */
+let selectCar: any = document.getElementById("selectCar");
+
+/* Error messages */
+let issues: any = (<HTMLInputElement>document.getElementById("issues"));
+
 /* ========================== Creat Car =========================== */
 
 function createCar() {
@@ -23,6 +28,10 @@ function createCar() {
     let plate = plateInput.value;
     let brand = brandInput.value;
     let color = colorInput.value;
+
+
+
+    let i: number = 0;
 
     if (validatePlate() && validateBrand() && validateColor()) {
 
@@ -32,13 +41,12 @@ function createCar() {
             arrCar.push(myCar);
             printCar();
             if (arrCar[2]) {
-                (<HTMLInputElement>document.querySelector("#issues")).innerHTML = "You have already created 3 cars. Please, refresh the window.";
+                issues.innerHTML = "You have already created 3 cars. Please, refresh the window.";
                 (<HTMLInputElement>document.querySelector("#refreshWindow")).classList.remove("dnone");
             }
         }
-
     } else {
-        (<HTMLInputElement>document.querySelector("#issues")).innerHTML = "Your car has not been created";
+        issues.innerHTML = "Your car has not been created";
     }
 }
 
@@ -81,7 +89,10 @@ var printCar = () => {
     let i: number = 0;
     console.log(arrCar[i]);
 
-    (<HTMLInputElement>document.getElementById("selectCar")).innerHTML += '<option value="' + myCar.plate + '">' + myCar.brand + ': ' + myCar.plate + ', ' + myCar.color + '</option>';
+
+    for (i = 0; i < arrCar.length; i++) { }
+    selectCar.innerHTML += '<option id="' + i + '" value="' + myCar.plate + '">' + myCar.brand + ': ' + myCar.plate + ', ' + myCar.color + '</option>';
+
 
     // Referencio el div que te 3 caixetins amb grid
     let datasheet: any = document.getElementById("allCarGrid");
@@ -121,6 +132,7 @@ var printColorCar = (bubbleColor: any) => {
     carImage.setAttribute("height", "auto");
     carImage.setAttribute("class", "carImage");
 
+    // Adjudico una id única + i a cada img de fitxa tècnica
     for (let i = 0; i <= arrCar.length; i++) {
         carImage.setAttribute("id", "carImage" + i);
     }
@@ -221,7 +233,6 @@ function validateColor() {
 }
 
 /* =============================================== WHEELS =============================================== */
-
 function sendFormWheels() {
 
     let errors: number = 0;
@@ -230,10 +241,7 @@ function sendFormWheels() {
     // Pas 1: Validar tots els inputs
     for (i = 1; i <= 4; i++) {
         let wheelDiameter: number = Number((<HTMLInputElement>document.getElementById("wheelDiameter" + i)).value);
-        //let wheelBrand: string = (<HTMLInputElement>document.getElementById("wheelBrand" + i)).value;
-
-        let errWheelDiameter: any = document.getElementById("errWheelDiameter");
-        //let errWheelBrand: any = document.getElementById("errWheelBrand");
+        let wheelBrand: string = (<HTMLInputElement>document.getElementById("wheelBrand" + i)).value;
 
         let correctInput: any;
         let incorrectInput: any;
@@ -241,7 +249,7 @@ function sendFormWheels() {
         if (!validateDiameter(Number(wheelDiameter))) {
             incorrectInput = (<HTMLInputElement>document.getElementById("wheelDiameter" + i));
             incorrectInput.setAttribute("class", "incorrectBorder");
-            errWheelDiameter.innerHTML = "wheel diameter has to be 0.4 to 2";
+            issues.innerHTML = "wheel diameter has to be 0.4 to 2";
             errors++;
         } else {
             correctInput = (<HTMLInputElement>document.getElementById("wheelDiameter" + i));
@@ -249,16 +257,11 @@ function sendFormWheels() {
 
         }
 
-        /*if (wheelBrand == "") {
-            alert("required input");
-            //error(errWheelBrand, wheelBrand);
+        if (wheelBrand == "") {
+            issues.innerHTML("* All Add Wheels inputs are required");
             errors++;
-        }*/
+        }
     }
-
-
-    // capturo el cotxe seleccionat per value matrícula per fer la comparació amb els cotxes creats a l'array de cotxes
-    let selectedCar: any = (<HTMLInputElement>document.getElementById("selectCar")).value;
 
     // Pas 2: Si totes estan bé, les afgim
     if (errors == 0) {
@@ -272,84 +275,39 @@ function sendFormWheels() {
             let wheelGenerica = new Wheel(Number(wheelDiameter), wheelBrand);
 
             console.log(wheelGenerica);
-
+            let i: number;
             let j: any;
             for (let carItem of arrCar) {
                 j = carItem;
-                if (selectedCar === j.plate) {
+                if (selectCar.value === j.plate) {
                     j.addWheel(wheelGenerica);
                     console.log(j);
                 }
             }
         }
-        // recorro array de cotxes per imprimir rodes en el cotxe seleccionat. Fora del bucle d'afegir rodes, perquè si no 
 
-        let arrCarImg: any[] = [];
-        let i: number;
-        let carImage: any;
-        for (i = 1; i <= arrCar.length; i++) {
-            carImage = document.querySelector("#carImage");
-            arrCarImg.push(carImage);
-        }
-
-        const imgFound: any = arrCarImg.find(item => {
-            if (selectedCar.value === j.value) {
-
-            }
-            return selectedCar.id;
-        });
 
         let j: any;
         for (let carItem of arrCar) {
             j = carItem;
-            if (selectedCar === j.plate) {
 
-                selectedCar = j;
-                switch (j.color) {
+            if ((selectCar.value === j.plate) && (selectCar.value === selectCar.options[0].value)) {
+                printColorCarWheels1(j.color);
+            }
 
-                    case (j.color = "white"):
-                        selectedCar.value = "white";
-                        carImage.src = "../images/white-car.svg";
-                        break;
-                    case (j.color = "silver"):
-                        selectedCar.value = "silver";
-                        carImage.src = "../images/silver-car.svg";
-                        break;
-                    case (j.color = "red"):
-                        selectedCar.value = "red";
-                        carImage.src = "../images/red-car.svg";
-                        break;
-                    case (j.color = "green"):
-                        selectedCar.value = "green";
-                        carImage.src = "../images/green-car.svg";
-                        break;
-                    case (j.color = "blue"):
-                        selectedCar.value = "blue";
-                        carImage.src = "../images/blue-car.svg";
-                        break;
-                    case (j.color = "yellow"):
-                        selectedCar.value = "yellow";
-                        carImage.src = "../images/yellow-car.svg";
-                        break;
-                    default:
-                        break;
-                }
+            else if ((selectCar.value === j.plate) && (selectCar.value === selectCar.options[1].value)) {
+                printColorCarWheels2(j.color);
+            }
 
-                if (j.value === selectedCar.value) {}
+            else if ((selectCar.value === j.plate) && (selectCar.value === selectCar.options[2].value)) {
+                printColorCarWheels3(j.color);
             }
         }
-
-        console.log(imgFound);
-
-        
-
-        
-        //printColorCarWheels(colorInput.value);
-        console.log(selectedCar.value);
-
     }
 
+
 }
+
 /*
 var validateWheelBrand = (brand: string) => {
     
@@ -376,41 +334,213 @@ var validateDiameter = (diameter: number) => {
     return isValidDiameter;
 }
 
+
 /* ====== Escollir imatge de cotxe a l'afegir les rodes ====== */
-/*var printColorCarWheels = (color: any) => {
 
-    let i: number;
-    let carImage: any;
-    for (i = 0; i < arrCar.length; i++) {
-        carImage = document.getElementById("carImage" + i);
+
+var printColorCarWheels1 = (color: string) => {
+
+    let j: any;
+    for (let carItem of arrCar) {
+        j = carItem;
+        if ((selectCar.value === j.plate) && (selectCar.value === selectCar.options[0].value)) {
+
+            switch (j.color) {
+
+                case (j.color = "white"):
+                    selectCar.value = "white";
+                    break;
+
+                case (j.color = "silver"):
+                    selectCar.value = "silver";
+                    break;
+
+                case (j.color = "red"):
+                    selectCar.value = "red";
+                    break;
+
+                case (j.color = "green"):
+                    selectCar.value = "green";
+                    break;
+
+                case (j.color = "blue"):
+                    selectCar.value = "blue";
+                    break;
+
+                case (j.color = "yellow"):
+                    selectCar.value = "yellow";
+                    break;
+
+                default:
+                    break;
+
+            }
+
+            // recorro array de cotxes per imprimir rodes en el cotxe seleccionat. Fora del bucle d'afegir rodes, perquè si no
+            let carImage1: any = document.getElementById("carImage1");
+
+            switch (j.color) {
+                case "white":
+                    carImage1.src = "../images/white-car.svg";
+                    break;
+                case "silver":
+                    carImage1.src = "../images/silver-car.svg";
+                    break;
+                case "red":
+                    carImage1.src = "../images/red-car.svg";
+                    break;
+                case "green":
+                    carImage1.src = "../images/green-car.svg";
+                    break;
+                case "blue":
+                    carImage1.src = "../images/blue-car.svg";
+                    break;
+                case "yellow":
+                    carImage1.src = "../images/yellow-car.svg";
+                    break;
+                default:
+                    break;
+            }
+        }
     }
+}
 
-    switch (myCar.color) {
+var printColorCarWheels2 = (color: string) => {
 
-        case "white":
-            carImage.src = "../images/white-car.svg";
-            break;
-        case "silver":
-            carImage.src = "../images/silver-car.svg";
-            break;
-        case "red":
-            carImage.src = "../images/red-car.svg";
-            break;
-        case "green":
-            carImage.src = "../images/green-car.svg";
-            break;
-        case "blue":
-            carImage.src = "../images/blue-car.svg";
-            break;
-        case "yellow":
-            carImage.src = "../images/yellow-car.svg";
-            break;
-        default:
-            break;
+    let j: any;
+    for (let carItem of arrCar) {
+        j = carItem;
+        if ((selectCar.value === j.plate) && (selectCar.value === selectCar.options[1].value)) {
+
+            switch (j.color) {
+
+                case (j.color = "white"):
+                    selectCar.value = "white";
+                    break;
+
+                case (j.color = "silver"):
+                    selectCar.value = "silver";
+                    break;
+
+                case (j.color = "red"):
+                    selectCar.value = "red";
+                    break;
+
+                case (j.color = "green"):
+                    selectCar.value = "green";
+                    break;
+
+                case (j.color = "blue"):
+                    selectCar.value = "blue";
+                    break;
+
+                case (j.color = "yellow"):
+                    selectCar.value = "yellow";
+                    break;
+
+                default:
+                    break;
+
+            }
+
+            // recorro array de cotxes per imprimir rodes en el cotxe seleccionat. Fora del bucle d'afegir rodes, perquè si no
+            let carImage2: any = document.getElementById("carImage2");
+
+            switch (j.color) {
+                case "white":
+                    carImage2.src = "../images/white-car.svg";
+                    break;
+                case "silver":
+                    carImage2.src = "../images/silver-car.svg";
+                    break;
+                case "red":
+                    carImage2.src = "../images/red-car.svg";
+                    break;
+                case "green":
+                    carImage2.src = "../images/green-car.svg";
+                    break;
+                case "blue":
+                    carImage2.src = "../images/blue-car.svg";
+                    break;
+                case "yellow":
+                    carImage2.src = "../images/yellow-car.svg";
+                    break;
+                default:
+                    break;
+            }
+
+        }
     }
-    return carImage;
-}*/
+}
 
+
+var printColorCarWheels3 = (color: string) => {
+
+    let j: any;
+    for (let carItem of arrCar) {
+        j = carItem;
+        if ((selectCar.value === j.plate) && (selectCar.value === selectCar.options[2].value)) {
+
+            switch (j.color) {
+
+                case (j.color = "white"):
+                    selectCar.value = "white";
+                    break;
+
+                case (j.color = "silver"):
+                    selectCar.value = "silver";
+                    break;
+
+                case (j.color = "red"):
+                    selectCar.value = "red";
+                    break;
+
+                case (j.color = "green"):
+                    selectCar.value = "green";
+                    break;
+
+                case (j.color = "blue"):
+                    selectCar.value = "blue";
+                    break;
+
+                case (j.color = "yellow"):
+                    selectCar.value = "yellow";
+                    break;
+
+                default:
+                    break;
+
+            }
+
+            // recorro array de cotxes per imprimir rodes en el cotxe seleccionat. Fora del bucle d'afegir rodes, perquè si no
+            let carImage3: any = document.getElementById("carImage3");
+
+            switch (j.color) {
+                case "white":
+                    carImage3.src = "../images/white-car.svg";
+                    break;
+                case "silver":
+                    carImage3.src = "../images/silver-car.svg";
+                    break;
+                case "red":
+                    carImage3.src = "../images/red-car.svg";
+                    break;
+                case "green":
+                    carImage3.src = "../images/green-car.svg";
+                    break;
+                case "blue":
+                    carImage3.src = "../images/blue-car.svg";
+                    break;
+                case "yellow":
+                    carImage3.src = "../images/yellow-car.svg";
+                    break;
+                default:
+                    break;
+            }
+
+        }
+    }
+}
 
 // Error functions
 function error(text: any, field: any) {
