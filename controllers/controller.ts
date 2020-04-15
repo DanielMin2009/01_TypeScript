@@ -2,6 +2,8 @@ let myCar: Car;
 // Aquesta és la manera de declarar un array d'objectes buit.
 let arrCar: Car[] = new Array();
 
+let arrWheel: Wheel[];
+
 let brandCarArr: string[] = new Array("Abarth", "Alfa Romeo", "Aston Martin", "Audi", "Bentley", "BMW", "Cadillac", "Caterham", "Chevrolet", "Citroen", "Dacia", "Ferrari", "Fiat", "Ford", "Honda", "Infiniti", "Isuzu", "Iveco", "Jaguar", "Jeep", "Kia", "KTM", "Lada", "Lamborghini", "Lancia", "Land Rover", "Lexus", "Lotus", "Maserati", "Mazda", "Mercedes-Benz", "Mini", "Mitsubishi", "Morgan", "Nissan", "Opel", "Peugeot", "Porsche", "Renault", "Rolls-Royce", "Seat", "Skoda", "Smart", "SsangYong", "Subaru", "Suzuki", "Tata", "Tesla", "Toyota", "Volkswagen", "Volvo");
 
 
@@ -258,55 +260,58 @@ function sendFormWheels() {
         }
 
         if (wheelBrand == "") {
-            issues.innerHTML("* All Add Wheels inputs are required");
+            issues.innerHTML = "* All Add Wheels inputs are required";
             errors++;
         }
     }
 
+
     // Pas 2: Si totes estan bé, les afgim
+
     if (errors == 0) {
-
         let x: number;
-        for (x = 1; x <= 4; x++) {
 
+
+        for (x = 1; x <= 4; x++) {
             let wheelDiameter: number = Number((<HTMLInputElement>document.getElementById("wheelDiameter" + x)).value);
             let wheelBrand: string = (<HTMLInputElement>document.getElementById("wheelBrand" + x)).value;
 
             let wheelGenerica = new Wheel(Number(wheelDiameter), wheelBrand);
-
-            console.log(wheelGenerica);
-            let i: number;
             let j: any;
+            
             for (let carItem of arrCar) {
                 j = carItem;
-                if (selectCar.value === j.plate) {
+                if ((j.wheels.length < 4) && (selectCar.value === j.plate)) {
                     j.addWheel(wheelGenerica);
-                    console.log(j);
+                } else {
+                    issues.innerHTML = "* This car has already 4 wheels";
                 }
             }
+
         }
 
-
-        let j: any;
-        for (let carItem of arrCar) {
-            j = carItem;
-
-            if ((selectCar.value === j.plate) && (selectCar.value === selectCar.options[0].value)) {
-                printColorCarWheels1(j.color);
-            }
-
-            else if ((selectCar.value === j.plate) && (selectCar.value === selectCar.options[1].value)) {
-                printColorCarWheels2(j.color);
-            }
-
-            else if ((selectCar.value === j.plate) && (selectCar.value === selectCar.options[2].value)) {
-                printColorCarWheels3(j.color);
-            }
-        }
     }
 
+    let j: any;
+    for (let carItem of arrCar) {
+        j = carItem;
 
+        if ((selectCar.value === j.plate) && (selectCar.value === selectCar.options[0].value)) {
+            printColorCarWheels1(j.color);
+        }
+
+        else if ((selectCar.value === j.plate) && (selectCar.value === selectCar.options[1].value)) {
+            printColorCarWheels2(j.color);
+        }
+
+        else if ((selectCar.value === j.plate) && (selectCar.value === selectCar.options[2].value)) {
+            printColorCarWheels3(j.color);
+        }
+    }
 }
+
+
+
 
 /*
 var validateWheelBrand = (brand: string) => {
