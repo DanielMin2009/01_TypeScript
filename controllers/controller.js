@@ -26,6 +26,7 @@ function createCar() {
         myCar = new Car(plate, brand, color);
         if (arrCar.length <= 2) {
             arrCar.push(myCar);
+            console.log(myCar);
             printCar();
             if (arrCar[2]) {
                 issues.innerHTML = "You have already created 3 cars. Please, refresh the window.";
@@ -68,8 +69,8 @@ function showColor(bubbleColor) {
 /* UI Car -- Imprimir el cotxe  */
 var printCar = () => {
     let i = 0;
-    console.log(arrCar[i]);
-    for (i = 0; i < arrCar.length; i++) { }
+    for (i = 0; i < arrCar.length; i++) {
+    }
     selectCar.innerHTML += '<option id="' + i + '" value="' + myCar.plate + '">' + myCar.brand + ': ' + myCar.plate + ', ' + myCar.color + '</option>';
     // Referencio el div que te 3 caixetins amb grid
     let datasheet = document.getElementById("allCarGrid");
@@ -239,7 +240,7 @@ function sendFormWheels() {
                 if ((j.wheels.length < 4) && (selectCar.value === j.plate)) {
                     j.addWheel(wheelGenerica);
                 }
-                else {
+                else if (j.wheels.length > 4) {
                     issues.innerHTML = "* This car has already 4 wheels";
                 }
             }

@@ -41,6 +41,7 @@ function createCar() {
 
         if (arrCar.length <= 2) {
             arrCar.push(myCar);
+            console.log(myCar);
             printCar();
             if (arrCar[2]) {
                 issues.innerHTML = "You have already created 3 cars. Please, refresh the window.";
@@ -89,10 +90,10 @@ function showColor(bubbleColor: any) {
 var printCar = () => {
 
     let i: number = 0;
-    console.log(arrCar[i]);
 
 
-    for (i = 0; i < arrCar.length; i++) { }
+    for (i = 0; i < arrCar.length; i++) {
+    }
     selectCar.innerHTML += '<option id="' + i + '" value="' + myCar.plate + '">' + myCar.brand + ': ' + myCar.plate + ', ' + myCar.color + '</option>';
 
 
@@ -123,7 +124,7 @@ var printCar = () => {
                             </ul>
                         <div>`;
     // imprescindible al final del cicle afegir l'article, una vegada igualat a l'article amb tota la informació a dins
-    datasheet.appendChild(article);
+    datasheet.appendChild(article);    
 }
 
 /* ====== Escollir imatge de cotxe al crear-lo, sense rodes i segons el color escollit per pantalla ====== */
@@ -278,12 +279,12 @@ function sendFormWheels() {
 
             let wheelGenerica = new Wheel(Number(wheelDiameter), wheelBrand);
             let j: any;
-            
+
             for (let carItem of arrCar) {
                 j = carItem;
                 if ((j.wheels.length < 4) && (selectCar.value === j.plate)) {
                     j.addWheel(wheelGenerica);
-                } else {
+                } else if (j.wheels.length > 4) {
                     issues.innerHTML = "* This car has already 4 wheels";
                 }
             }
@@ -308,9 +309,8 @@ function sendFormWheels() {
             printColorCarWheels3(j.color);
         }
     }
+
 }
-
-
 
 
 /*
