@@ -124,7 +124,7 @@ var printCar = () => {
                             </ul>
                         <div>`;
     // imprescindible al final del cicle afegir l'article, una vegada igualat a l'article amb tota la informació a dins
-    datasheet.appendChild(article);    
+    datasheet.appendChild(article);
 }
 
 /* ====== Escollir imatge de cotxe al crear-lo, sense rodes i segons el color escollit per pantalla ====== */
@@ -278,19 +278,18 @@ function sendFormWheels() {
             let wheelBrand: string = (<HTMLInputElement>document.getElementById("wheelBrand" + x)).value;
 
             let wheelGenerica = new Wheel(Number(wheelDiameter), wheelBrand);
+            
             let j: any;
 
             for (let carItem of arrCar) {
                 j = carItem;
-                if ((j.wheels.length < 4) && (selectCar.value === j.plate)) {
-                    j.addWheel(wheelGenerica);
-                } else if (j.wheels.length > 4) {
+                if (j.wheels.length >= 4) {
                     issues.innerHTML = "* This car has already 4 wheels";
+                } else if ((j.wheels.length < 4) && (selectCar.value === j.plate)) {
+                    j.addWheel(wheelGenerica);
                 }
             }
-
         }
-
     }
 
     let j: any;

@@ -237,11 +237,11 @@ function sendFormWheels() {
             let j;
             for (let carItem of arrCar) {
                 j = carItem;
-                if ((j.wheels.length < 4) && (selectCar.value === j.plate)) {
-                    j.addWheel(wheelGenerica);
-                }
-                else if (j.wheels.length > 4) {
+                if (j.wheels.length >= 4) {
                     issues.innerHTML = "* This car has already 4 wheels";
+                }
+                else if ((j.wheels.length < 4) && (selectCar.value === j.plate)) {
+                    j.addWheel(wheelGenerica);
                 }
             }
         }
